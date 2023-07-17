@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Demo
 {
-    public partial class Form1 : Form
+    public partial class Form_LabelMove : Form
     {
-        public Form1()
+        public Form_LabelMove()
         {
             InitializeComponent();
         }
