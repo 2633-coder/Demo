@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Demo
+namespace Demo.Form_UI
 {
     public partial class Form_LabelMove : Form
     {

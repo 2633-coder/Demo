@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,33 +51,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form_ChartPoint.cs">
+    <Content Include="Config\Menu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Common\FilesINI.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Form_UI\Form_ChartPoint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_ChartPoint.Designer.cs">
+    <Compile Include="Form_UI\Form_ChartPoint.Designer.cs">
       <DependentUpon>Form_ChartPoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_LabelMove.cs">
+    <Compile Include="Form_UI\Form_LabelMove.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_LabelMove.Designer.cs">
+    <Compile Include="Form_UI\Form_LabelMove.Designer.cs">
       <DependentUpon>Form_LabelMove.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Signature.cs">
+    <Compile Include="Form_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Signature.Designer.cs">
+    <Compile Include="Form_Menu.Designer.cs">
+      <DependentUpon>Form_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_UI\Form_Signature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_UI\Form_Signature.Designer.cs">
       <DependentUpon>Form_Signature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\DemoMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form_ChartPoint.resx">
+    <EmbeddedResource Include="Form_Menu.resx">
+      <DependentUpon>Form_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_UI\Form_ChartPoint.resx">
       <DependentUpon>Form_ChartPoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_LabelMove.resx">
+    <EmbeddedResource Include="Form_UI\Form_LabelMove.resx">
       <DependentUpon>Form_LabelMove.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Signature.resx">
+    <EmbeddedResource Include="Form_UI\Form_Signature.resx">
       <DependentUpon>Form_Signature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -86,6 +105,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

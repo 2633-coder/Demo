@@ -1,4 +1,4 @@
-﻿namespace Demo
+﻿namespace Demo.Form_UI
 {
     partial class Form_Signature
     {

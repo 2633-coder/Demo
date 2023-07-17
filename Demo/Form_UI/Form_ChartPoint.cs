@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace Demo
+namespace Demo.Form_UI
 {
     public partial class Form_ChartPoint : Form
     {
