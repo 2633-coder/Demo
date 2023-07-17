@@ -59,6 +59,12 @@
     <Compile Include="Form_LabelMove.Designer.cs">
       <DependentUpon>Form_LabelMove.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Signature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Signature.Designer.cs">
+      <DependentUpon>Form_Signature.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_ChartPoint.resx">
@@ -66,6 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_LabelMove.resx">
       <DependentUpon>Form_LabelMove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Signature.resx">
+      <DependentUpon>Form_Signature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
