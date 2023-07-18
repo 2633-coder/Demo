@@ -1,5 +1,6 @@
 [
 {"Name":"Signature","Text":"绘制电子签名"},
 {"Name":"LabelMove","Text":"Label拖拽挪动"},
-{"Name":"ChartPoint","Text":"Label绘制散点图"}
+{"Name":"ChartPoint","Text":"Label绘制散点图"},
+{"Name":"Calender","Text":"时序管理"}
 ]

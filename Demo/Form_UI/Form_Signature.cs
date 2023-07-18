@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Demo.Form_UI
 {
@@ -42,30 +43,36 @@ namespace Demo.Form_UI
         {
             try
             {
-                SavedBitmap = new Bitmap(pic_Signature.Width, pic_Signature.Height);
-                pic_Signature.DrawToBitmap(SavedBitmap, new Rectangle(0, 0, pic_Signature.Width, pic_Signature.Height));
-
-                #region 保存为透明的png图片
-
-                Bitmap bmp = SavedBitmap;
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
-                int length = data.Stride * data.Height;
-                IntPtr ptr = data.Scan0;
-                byte[] buff = new byte[length];
-                Marshal.Copy(ptr, buff, 0, length);
-                for (int i = 3; i < length; i += 4)
+                FolderBrowserDialog browserDialog = new FolderBrowserDialog();
+                if (browserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (buff[i - 1] >= 230 && buff[i - 2] >= 230 && buff[i - 3] >= 230)
-                    {
-                        buff[i] = 0;
-                    }
-                }
-                Marshal.Copy(buff, 0, ptr, length);
-                bmp.UnlockBits(data);
-                bmp.Save(@"D:\Test\TestSaveImg.png", ImageFormat.Png);
+                    string foldPath = browserDialog.SelectedPath;
 
-                MessageBox.Show("保存成功");
-                #endregion
+                    SavedBitmap = new Bitmap(pic_Signature.Width, pic_Signature.Height);
+                    pic_Signature.DrawToBitmap(SavedBitmap, new Rectangle(0, 0, pic_Signature.Width, pic_Signature.Height));
+
+                    #region 保存为透明的png图片
+
+                    Bitmap bmp = SavedBitmap;
+                    BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
+                    int length = data.Stride * data.Height;
+                    IntPtr ptr = data.Scan0;
+                    byte[] buff = new byte[length];
+                    Marshal.Copy(ptr, buff, 0, length);
+                    for (int i = 3; i < length; i += 4)
+                    {
+                        if (buff[i - 1] >= 230 && buff[i - 2] >= 230 && buff[i - 3] >= 230)
+                        {
+                            buff[i] = 0;
+                        }
+                    }
+                    Marshal.Copy(buff, 0, ptr, length);
+                    bmp.UnlockBits(data);
+                    bmp.Save(foldPath + @"\TestSaveImg.png", ImageFormat.Png);
+
+                    MessageBox.Show("保存成功");
+                    #endregion
+                }
             }
             catch (Exception ex)
             {

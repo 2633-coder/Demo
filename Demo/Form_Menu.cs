@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,9 @@ namespace Demo
                 case "btn_ChartPoint":
                     new Form_ChartPoint().Show();
                     break;
+                case "btn_Calender":
+                    new Form_Calender(new SequenceModel()).Show();
+                    break;                    
             }
 
         }

@@ -208,6 +208,8 @@ namespace Demo.Form_UI
         {
             try
             {
+                chart1.Series.Clear();
+
                 Task.Run(() =>
                 {
                     this.Invoke(new Action(() =>
