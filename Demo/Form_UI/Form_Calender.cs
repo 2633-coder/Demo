@@ -37,9 +37,9 @@ namespace Demo.Form_UI
         Icon _Icon = Icon.FromHandle(Resources.实验室人员.GetHicon());
 
         /// <summary>
-        /// 模拟数据
+        /// 模拟数据-模拟数据库数据
         /// </summary>
-        List<SequenceModel> list_Sequence = new List<SequenceModel>() {
+        public static List<SequenceModel> list_Sequence = new List<SequenceModel>() {
         new SequenceModel () {Id=1,TestId=1,TestName="TestName1",UserId=1,UserName="用户1",
             DateTimeStart=Convert.ToDateTime("2023-07-01 12:33:02"),
             DateTimeEnd=Convert.ToDateTime("2023-07-01 12:33:02"),
@@ -508,6 +508,8 @@ namespace Demo.Form_UI
                 if (flag > 0)
                 {
                     MessageBox.Show("添加排期成功");
+
+                    //业务需要可将其禁用
                     btn_SequenceAdd.Enabled = false;
                     btnToday_Click(sender, e);
                 }
@@ -571,7 +573,11 @@ namespace Demo.Form_UI
 
             //return flag;
 
-            return 0;
+            int flag = list_Sequence.Count;
+
+            list_Sequence.Add(sequence);
+
+            return list_Sequence.Count - flag;
         }
 
         /// <summary>
@@ -588,7 +594,7 @@ namespace Demo.Form_UI
 
             //return flag != 0;
 
-            return false;
+            return list_Sequence.Where(m => Convert.ToDateTime(nst) <= m.DateTimeEnd && m.DateTimeStart <= Convert.ToDateTime(net) && m.TestId != testId).Count() != 0;
         }
 
         /// <summary>
@@ -621,8 +627,26 @@ namespace Demo.Form_UI
             //    message = " 此实验未预约排期 ";
             //    return false;
             //}
-            message = "";
-            return false;
+
+            //是否有此实验的预约
+            if (list_Sequence.Where(m => m.UserId == userId && m.TestId == testId).Count() > 0)
+            {
+                if (list_Sequence.Where(m => m.UserId == userId && m.TestId == testId && m.DateTimeStart <= DateTime.Now && m.DateTimeEnd >= DateTime.Now).Count() > 0)
+                {
+                    message = " 有此实验并在当前时间段内 ";
+                    return true;
+                }
+                else
+                {
+                    message = " 不在预约时间段内 ";
+                    return false;
+                }
+            }
+            else
+            {
+                message = " 此实验未预约排期 ";
+                return false;
+            }
         }
 
         /// <summary>
@@ -644,6 +668,9 @@ namespace Demo.Form_UI
             //    _Sequence.TestName = "实验项目0000001";
             //    _Sequence.UserName = "XXX";
             //}
+
+            _Sequence.TestName = "实验项目0000001";
+            _Sequence.UserName = "XXX";
         }
 
     }

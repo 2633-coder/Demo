@@ -87,6 +87,20 @@ namespace Demo.UserControls
             DialogResult dialog = MessageBox.Show("确认更新排期吗？", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (DialogResult.OK == dialog)
             {
+                Form_Calender.list_Sequence.FirstOrDefault(m => m.UserId == m_Sequence.UserId && m.TestId == m_Sequence.TestId).DateTimeStart = Convert.ToDateTime(dtp_Start.Text);
+                Form_Calender.list_Sequence.FirstOrDefault(m => m.UserId == m_Sequence.UserId && m.TestId == m_Sequence.TestId).DateTimeEnd = Convert.ToDateTime(dtp_End.Text);
+
+                if (Form_Calender.list_Sequence.Where(m => m.UserId == m_Sequence.UserId && m.TestId == m_Sequence.TestId && m.DateTimeStart == Convert.ToDateTime(dtp_Start.Text) && m.DateTimeEnd == Convert.ToDateTime(dtp_End.Text)).Count() > 0)
+                {
+                    MessageBox.Show(" 更新排期成功 ");
+
+                    EventBind?.Invoke(sender, e);
+                }
+                else
+                {
+                    MessageBox.Show(" 更新排期失败 ");
+                }
+
                 //sqlcm sqlHeper = new sqlcm();
                 //string sql = $" Update T_Sequence Set DateTimeStart='{dtp_Start.Text}',DateTimeEnd='{dtp_End.Text}' Where UserId={m_Sequence.UserId} And TestId={m_Sequence.TestId} ";
 
@@ -114,6 +128,21 @@ namespace Demo.UserControls
             DialogResult dialog = MessageBox.Show("确认删除排期吗？", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (DialogResult.OK == dialog)
             {
+                int flag = Form_Calender.list_Sequence.Count;
+
+                Form_Calender.list_Sequence.Remove(Form_Calender.list_Sequence.FirstOrDefault(m => m.UserId == m_Sequence.UserId && m.TestId == m_Sequence.TestId));
+
+                if (flag - Form_Calender.list_Sequence.Count > 0)
+                {
+                    MessageBox.Show(" 删除排期成功 ");
+
+                    EventBind?.Invoke(sender, e);
+                }
+                else
+                {
+                    MessageBox.Show(" 删除排期失败 ");
+                }
+
                 //sqlcm sqlHeper = new sqlcm();
                 //string sql = $" Delete T_Sequence Where UserId={m_Sequence.UserId} And TestId={m_Sequence.TestId} ";
 
